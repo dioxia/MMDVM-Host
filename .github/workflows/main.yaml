@@ -1,0 +1,77 @@
+#
+# .github/workflows/main.yml
+#
+
+name: Build MMDVM-Host
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build (${{ matrix.arch }})
+    runs-on: ubuntu-22.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: linux-amd64
+            container:
+            cc: gcc
+            cxx: g++
+
+          - arch: linux-arm64
+            container: arm64v8/ubuntu:22.04
+            cc: aarch64-linux-gnu-gcc
+            cxx: aarch64-linux-gnu-g++
+
+          - arch: linux-armhf
+            container: arm32v7/ubuntu:22.04
+            cc: arm-linux-gnueabihf-gcc
+            cxx: arm-linux-gnueabihf-g++
+
+    container:
+      image: ${{ matrix.container }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install packages
+        run: |
+          apt-get update
+          apt-get install -y software-properties-common wget git make pkg-config
+
+          add-apt-repository -y ppa:mosquitto-dev/mosquitto-ppa
+          apt-get update
+
+          apt-get install -y \
+            build-essential \
+            libusb-1.0-0-dev \
+            libasound2-dev \
+            libssl-dev \
+            libfftw3-dev \
+            libi2c-dev \
+            libmosquitto-dev
+
+      - name: Download json.hpp
+        run: |
+          wget -O json.hpp \
+            https://github.com/nlohmann/json/releases/download/v3.12.0/json.hpp
+
+      - name: Build
+        env:
+          CC: ${{ matrix.cc }}
+          CXX: ${{ matrix.cxx }}
+        run: |
+          make clean || true
+          make -j$(nproc)
+
+      - name: Rename binary
+        run: |
+          mv MMDVM-Host MMDVM-Host-${{ matrix.arch }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MMDVM-Host-${{ matrix.arch }}
+          path: MMDVM-Host-${{ matrix.arch }}
