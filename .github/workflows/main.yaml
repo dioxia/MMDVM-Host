@@ -101,9 +101,9 @@ jobs:
         run: |
           mv MMDVM-Host "${{ matrix.binary }}"
 
-      - name: Strip binary
-        run: |
-          strip "${{ matrix.binary }}" || true
+      #- name: Strip binary
+      #  run: |
+      #    strip "${{ matrix.binary }}" || true
 
       - name: Verify binary
         run: |
