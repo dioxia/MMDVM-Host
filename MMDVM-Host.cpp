@@ -40,7 +40,7 @@
 
 #include <cstdlib>
 
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 
 #if !defined(_WIN32) && !defined(_WIN64)
 #include <sys/types.h>

@@ -31,7 +31,7 @@
 #include <string>
 #include <deque>
 
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 
 struct POCSAGData {
 	unsigned int         m_ric;

@@ -26,7 +26,7 @@
 
 #if defined(USE_FM)
 
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 
 // Uncomment this to dump audio to a raw audio file
 // The file will be written in same folder as executable

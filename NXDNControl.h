@@ -35,7 +35,7 @@
 
 #include <string>
 
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 
 class CNXDNControl {
 public:

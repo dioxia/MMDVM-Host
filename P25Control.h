@@ -36,7 +36,7 @@
 
 #include <cstdio>
 
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 
 class CP25Control {
 public:

@@ -21,7 +21,7 @@
 
 #include <string>
 
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 
 #define	LogDebug(fmt, ...)	Log(1U, fmt, ##__VA_ARGS__)
 #define	LogMessage(fmt, ...)	Log(2U, fmt, ##__VA_ARGS__)

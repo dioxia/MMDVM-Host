@@ -38,7 +38,7 @@
 
 #include <vector>
 
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 
 enum class ACTIVITY_TYPE {
 	NONE,
