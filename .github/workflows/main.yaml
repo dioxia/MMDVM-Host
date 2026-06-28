@@ -115,4 +115,4 @@ jobs:
         with:
           name: ${{ matrix.binary }}
           path: ${{ matrix.binary }}
-          compression-level: 0
+          compression-level: 8
